@@ -1,135 +1,714 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kozyrev Pavel | Electrical Engineer</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SMARTXYNERGY — home energy & comfort for the Pacific Northwest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#050914;
-  color:#fff;
-}
+  :root{
+    --spruce:#1C3A2E;
+    --spruce-2:#244A39;
+    --moss:#4A7A5C;
+    --moss-soft:#6E9B7C;
+    --sage-bg:#EDF1E7;
+    --sage-bg-2:#E4EAD9;
+    --paper:#F7F9F2;
+    --bark:#1E261C;
+    --bark-soft:#4E584A;
+    --honey:#E0922E;
+    --honey-deep:#C2761C;
+    --ember:#E85C3A;
+    --sun:#F4C24B;
+    --line:rgba(30,38,28,0.12);
+    --line-strong:rgba(30,38,28,0.20);
+    --shadow:0 18px 50px -24px rgba(28,58,46,0.45);
+    --r:18px;
+    --mtn:url("https://images.unsplash.com/photo-1758642882005-447873fd2d29?fm=jpg&q=70&w=2000&auto=format&fit=crop");
+  }
 
-.container {
-  max-width:1000px;
-  margin:auto;
-  padding:40px 20px;
-}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter",system-ui,sans-serif;
+    background:var(--sage-bg);
+    color:var(--bark);
+    font-size:17px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:"Spectral",Georgia,serif;font-weight:500;line-height:1.07;letter-spacing:-0.01em}
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
 
-h1 {
-  font-size:48px;
-  margin-bottom:10px;
-}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--moss);font-weight:500;display:inline-flex;align-items:center;gap:9px}
+  .eyebrow::before{content:"";width:22px;height:1.5px;background:var(--honey)}
+  .mono{font-family:"JetBrains Mono",monospace}
 
-h2 {
-  color:#d6a642;
-}
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:"Inter",sans-serif;font-weight:600;font-size:16px;
+    padding:15px 26px;border-radius:999px;cursor:pointer;border:none;
+    transition:transform .18s ease, background .18s ease, box-shadow .18s ease;white-space:nowrap}
+  .btn-primary{background:var(--honey);color:var(--spruce);box-shadow:0 10px 24px -10px rgba(224,146,46,0.8)}
+  .btn-primary:hover{background:var(--honey-deep);transform:translateY(-2px)}
+  .btn-ghost{background:rgba(247,249,242,.6);color:var(--spruce);border:1.5px solid var(--line-strong)}
+  .btn-ghost:hover{border-color:var(--spruce);transform:translateY(-2px)}
+  .btn svg{width:17px;height:17px}
 
-p {
-  color:#ccc;
-  line-height:1.6;
-}
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(237,241,231,0.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:"Spectral",serif;font-size:21px;font-weight:600;color:var(--spruce)}
+  .logo-mark{width:34px;height:34px;flex:none}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:15px;color:var(--bark-soft);font-weight:500;transition:color .15s}
+  .nav-links a:hover{color:var(--spruce)}
+  .nav-right{display:flex;align-items:center;gap:20px}
+  .nav-phone{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;color:var(--spruce)}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
+  .menu-toggle span{display:block;width:24px;height:2px;background:var(--spruce);margin:5px 0}
 
-.hero {
-  text-align:center;
-  padding:80px 0;
-}
+  /* Hero with forested-mountain background */
+  .hero{position:relative;padding:88px 0 96px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:var(--mtn) center 30%/cover no-repeat}
+  .hero-scrim{position:absolute;inset:0;z-index:0;background:
+    linear-gradient(90deg, var(--sage-bg) 2%, rgba(237,241,231,.93) 32%, rgba(237,241,231,.5) 62%, rgba(237,241,231,.12) 100%),
+    linear-gradient(180deg, rgba(237,241,231,.55) 0%, transparent 22%, transparent 62%, var(--sage-bg) 100%)}
+  .hero .wrap{position:relative;z-index:1}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(34px,5vw,60px);margin:20px 0 22px}
+  .hero h1 em{font-style:italic;color:var(--moss)}
+  .hero-sub{font-size:19px;color:var(--bark-soft);max-width:500px;margin-bottom:32px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .hero-trust{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--bark-soft)}
+  .hero-trust svg{width:18px;height:18px;color:var(--moss);flex:none}
 
-.btn {
-  display:inline-block;
-  margin:10px;
-  padding:12px 20px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
-}
+  /* Thermal compare (signature) */
+  .viewer{position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);
+    border:1px solid rgba(28,58,46,.25);background:#0d1713;aspect-ratio:5/4;cursor:ew-resize;user-select:none}
+  .viewer-layer{position:absolute;inset:0}
+  .viewer-layer img{width:100%;height:100%;object-fit:cover;object-position:center 50%;display:block}
+  /* BEFORE = hot (red) thermal, AFTER = cool (blue) thermal */
+  .thermal-hot{filter:url(#thermal-hot) contrast(1.06) brightness(1.05) saturate(1.05)}
+  .thermal-cool{filter:url(#thermal-cool) contrast(1.06) brightness(1.05) saturate(1.05)}
+  .glow{position:absolute;inset:0;mix-blend-mode:screen;animation:pulse 3.8s ease-in-out infinite;
+    background:
+      radial-gradient(ellipse 52% 11% at 50% 57%, rgba(255,210,110,.55), transparent 78%),
+      radial-gradient(circle at 50% 56%, rgba(255,140,60,.5), transparent 16%),
+      radial-gradient(ellipse 46% 7% at 50% 45%, rgba(255,120,50,.4), transparent 72%)}
+  @keyframes pulse{0%,100%{opacity:.6}50%{opacity:.95}}
+  .scan{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.45;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 4px)}
+  .scale{position:absolute;bottom:14px;left:14px;display:flex;align-items:center;gap:7px;z-index:2}
+  .scale.cool{left:auto;right:14px;flex-direction:row-reverse}
+  .scale .bar{width:9px;height:74px;border-radius:4px;border:1px solid rgba(255,255,255,.4)}
+  .scale.hot .bar{background:linear-gradient(to top,#3a0d0d,#7a1d10,#e8553a,#f2913e,#ffd76b,#fff6cf)}
+  .scale.cool .bar{background:linear-gradient(to top,#07142e,#143a7a,#2b6fd0,#3aa0e8,#7bd7ff,#eaffff)}
+  .scale .ticks{display:flex;flex-direction:column;justify-content:space-between;height:74px;
+    font-family:"JetBrains Mono",monospace;font-size:9px;color:rgba(255,255,255,.85)}
+  .layer-after{clip-path:inset(0 0 0 var(--pos,50%))}
+  .v-label{position:absolute;top:14px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;padding:5px 11px;border-radius:999px;backdrop-filter:blur(6px);z-index:3;font-weight:500}
+  .v-label.l{left:14px;background:rgba(232,92,58,.22);color:#ffd9cb;border:1px solid rgba(255,140,100,.4)}
+  .v-label.r{right:14px;background:rgba(110,155,124,.25);color:#d8f0df;border:1px solid rgba(150,200,165,.4)}
+  .handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:rgba(255,255,255,.9);z-index:4;transform:translateX(-1px)}
+  .handle::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;
+    background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%231C3A2E' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M9 6l-4 6 4 6M15 6l4 6-4 6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:center}
+  .viewer-cap{font-size:13.5px;color:var(--bark-soft);text-align:center;margin-top:14px}
+  .snow{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .frost{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(150,200,235,.28) 100%);
+    box-shadow:inset 0 0 60px rgba(120,180,230,.25)}
+  .heatwave{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:
+      radial-gradient(42% 34% at 84% 13%, rgba(255,224,150,.6), rgba(255,190,90,.18) 55%, transparent 72%),
+      radial-gradient(120% 90% at 50% 62%, transparent 52%, rgba(238,150,60,.24) 100%);
+    box-shadow:inset 0 0 60px rgba(238,160,70,.24)}
+  .flake{position:absolute;top:-8%;border-radius:50%;background:#fff;filter:blur(.3px);
+    animation:fall linear infinite, sway ease-in-out infinite alternate}
+  @keyframes fall{from{top:-8%}to{top:108%}}
+  @keyframes sway{from{transform:translateX(-7px)}to{transform:translateX(7px)}}
+  /* season visibility */
+  .viewer.summer .snow,.viewer.summer .frost{display:none}
+  .viewer:not(.summer) .heatwave{display:none}
+  /* season toggle */
+  .season{display:inline-flex;gap:4px;padding:4px;margin-bottom:14px;border-radius:999px;
+    background:rgba(247,249,242,.7);border:1px solid var(--line);backdrop-filter:blur(6px)}
+  .season-btn{font-family:"Inter",sans-serif;font-size:14px;font-weight:600;color:var(--bark-soft);
+    background:transparent;border:none;cursor:pointer;padding:8px 16px;border-radius:999px;transition:.18s}
+  .season-btn:hover{color:var(--spruce)}
+  .season-btn.active[data-season="winter"]{background:#2b6fd0;color:#fff}
+  .season-btn.active[data-season="summer"]{background:var(--honey);color:var(--spruce)}
 
-.primary {
-  background:#0f6fff;
-  color:#fff;
-}
+  /* Stats */
+  .stats{background:var(--spruce);color:#eef3ec;padding:46px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+  .stat .num{font-family:"JetBrains Mono",monospace;font-size:clamp(28px,3.6vw,40px);font-weight:700;color:var(--sun);letter-spacing:-0.02em}
+  .stat .lab{font-size:14.5px;color:#b9ccc0;margin-top:6px;line-height:1.4}
 
-.secondary {
-  border:1px solid #d6a642;
-  color:#d6a642;
-}
+  /* Sections */
+  .section{padding:92px 0}
+  .section-head{max-width:680px;margin-bottom:48px}
+  .section-head h2{font-size:clamp(28px,3.6vw,42px);margin:16px 0 14px}
+  .section-head p{color:var(--bark-soft);font-size:18px}
 
-.section {
-  margin-top:60px;
-}
+  /* Services */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:30px 26px;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s}
+  .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
+  .card-ico{width:46px;height:46px;border-radius:12px;background:rgba(74,122,92,.12);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .card-ico svg{width:24px;height:24px;color:var(--moss)}
+  .card h3{font-size:21px;margin-bottom:9px;color:var(--spruce)}
+  .card p{font-size:15.5px;color:var(--bark-soft);line-height:1.5}
 
-.card {
-  background:#0a1226;
-  padding:20px;
-  margin:10px 0;
-  border-radius:10px;
-}
+  /* Process */
+  .process{background:var(--sage-bg-2)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-strong)}
+  .step{padding:30px 26px 30px 0;border-right:1px solid var(--line);position:relative}
+  .step:last-child{border-right:none}
+  .step .n{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--honey-deep);font-weight:700;letter-spacing:.1em}
+  .step h3{font-size:20px;margin:14px 0 9px;color:var(--spruce)}
+  .step p{font-size:15px;color:var(--bark-soft)}
+  .step::before{content:"";position:absolute;top:-1px;left:0;width:46px;height:3px;background:var(--honey)}
 
-.footer {
-  text-align:center;
-  margin-top:80px;
-  color:#777;
-}
+  /* Calculator */
+  .calc-grid{display:grid;grid-template-columns:1fr 0.9fr;gap:48px;align-items:center}
+  .calc-box{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:34px;box-shadow:var(--shadow)}
+  .field{margin-bottom:26px}
+  .field label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:600;color:var(--spruce);margin-bottom:12px}
+  .field label .val{font-family:"JetBrains Mono",monospace;color:var(--honey-deep);font-size:16px}
+  input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:6px;background:var(--sage-bg-2);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--honey);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--honey);cursor:pointer;border:3px solid #fff}
+  .calc-result{text-align:center;padding:8px 0 4px}
+  .calc-result .small{font-size:14px;color:var(--bark-soft)}
+  .calc-result .big{font-family:"JetBrains Mono",monospace;font-size:clamp(38px,6vw,56px);font-weight:700;color:var(--moss);letter-spacing:-0.02em;margin:6px 0}
+  .calc-result .note{font-size:14px;color:var(--bark-soft);margin-bottom:22px}
+  .calc-side h2{font-size:clamp(26px,3.4vw,38px);margin:16px 0 16px}
+  .calc-side p{color:var(--bark-soft);font-size:17px;margin-bottom:14px}
+  .calc-side .disc{font-size:13px;color:var(--bark-soft);opacity:.85}
+
+  /* Testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .quote{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+  .quote .stars{color:var(--honey);font-size:15px;letter-spacing:2px;margin-bottom:14px}
+  .quote p{font-size:16px;color:var(--bark);line-height:1.55;margin-bottom:18px}
+  .quote .who{display:flex;align-items:center;gap:12px}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--moss);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:"Spectral",serif;flex:none}
+  .quote .who b{font-size:15px;font-weight:600;color:var(--spruce);display:block}
+  .quote .who span{font-size:13px;color:var(--bark-soft)}
+
+  /* Final CTA / form */
+  .final{background:var(--spruce);color:#eef3ec;border-radius:28px;padding:54px;display:grid;grid-template-columns:1fr 0.95fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+  .final .ridge{position:absolute;left:0;right:0;bottom:0;z-index:0;opacity:.5}
+  .final-txt{position:relative;z-index:1}
+  .final-txt .eyebrow{color:var(--sun)}
+  .final-txt .eyebrow::before{background:var(--sun)}
+  .final-txt h2{font-size:clamp(28px,3.6vw,40px);color:#fff;margin:16px 0 16px}
+  .final-txt p{color:#bdd0c5;font-size:17px;margin-bottom:22px}
+  .final-feat{display:flex;flex-direction:column;gap:12px}
+  .final-feat div{display:flex;gap:10px;align-items:center;font-size:15.5px;color:#d6e4db}
+  .final-feat svg{width:18px;height:18px;color:var(--sun);flex:none}
+  .form{position:relative;z-index:1;background:var(--paper);border-radius:20px;padding:30px;color:var(--bark)}
+  .form h3{font-size:22px;color:var(--spruce);margin-bottom:18px}
+  .form input{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;margin-bottom:13px;background:#fff;color:var(--bark)}
+  .form input:focus{outline:none;border-color:var(--moss)}
+  .form .btn-primary{width:100%;justify-content:center;margin-top:5px}
+  .form .fine{font-size:12.5px;color:var(--bark-soft);margin-top:13px;text-align:center}
+  .form-done{display:none;text-align:center;padding:24px 6px}
+  .form-done svg{width:54px;height:54px;color:var(--moss);margin:0 auto 14px}
+  .form-done h3{margin-bottom:8px}
+  .form-done p{color:var(--bark-soft);font-size:15px}
+
+  /* Footer with faint forested-mountain backdrop */
+  footer{position:relative;padding:54px 0 40px;margin-top:90px;overflow:hidden}
+  .foot-bg{position:absolute;inset:0;z-index:0;
+    background:linear-gradient(180deg, var(--sage-bg) 0%, rgba(237,241,231,.82) 42%, rgba(237,241,231,.9) 100%), var(--mtn) center 60%/cover no-repeat;
+    border-top:1px solid var(--line)}
+  footer .wrap{position:relative;z-index:1}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+  .foot-col h4{font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--bark-soft);margin-bottom:14px;font-family:"JetBrains Mono",monospace;font-weight:500}
+  .foot-col a,.foot-col p{display:block;font-size:15px;color:var(--bark-soft);margin-bottom:8px}
+  .foot-col a:hover{color:var(--spruce)}
+  .foot-bottom{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:13.5px;color:var(--bark-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Responsive */
+  @media(max-width:920px){
+    .hero-grid,.calc-grid,.final{grid-template-columns:1fr;gap:40px}
+    .hero-scrim{background:
+      linear-gradient(180deg, rgba(237,241,231,.78) 0%, rgba(237,241,231,.55) 40%, rgba(237,241,231,.9) 100%)}
+    .final{padding:40px 30px}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:30px 24px}
+    .cards,.quotes{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr);border-top:none}
+    .step{border-right:none;border-bottom:1px solid var(--line)}
+    .step:nth-child(odd){border-right:1px solid var(--line)}
+    .nav-links,.nav-phone{display:none}
+    .menu-toggle{display:block}
+  }
+  @media(max-width:560px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}
+    .section{padding:64px 0}
+    .cards,.quotes,.stats-grid,.steps{grid-template-columns:1fr}
+    .step:nth-child(odd){border-right:none}
+    .hero-cta .btn{flex:1;justify-content:center}
+    .final{padding:32px 22px}
+    .form{padding:24px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<!-- Thermal-camera color maps: HOT (red = heat escaping) and COOL (blue = heat retained) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="thermal-hot" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.33 0.34 0.33 0 0  0.33 0.34 0.33 0 0  0.33 0.34 0.33 0 0  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.42 0.68 0.88 0.98 1 1"/>
+      <feFuncG type="table" tableValues="0.03 0.13 0.34 0.58 0.84 1"/>
+      <feFuncB type="table" tableValues="0.12 0.12 0.14 0.16 0.34 0.74"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="thermal-cool" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.33 0.34 0.33 0 0  0.33 0.34 0.33 0 0  0.33 0.34 0.33 0 0  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.04 0.07 0.12 0.26 0.52 0.86"/>
+      <feFuncG type="table" tableValues="0.09 0.22 0.42 0.62 0.82 0.96"/>
+      <feFuncB type="table" tableValues="0.34 0.58 0.82 0.94 1 1"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
 
-<div class="hero">
-  <h1>Kozyrev Pavel</h1>
-  <h2>Electrical Engineer</h2>
-  <p>
-    Performing comprehensive energy audits, optimizing energy efficiency, and deploying wireless control systems for residential and commercial applications.
-  </p>
-
-  <a href="mailto:Smartxynergy@gmail.com" class="btn primary">Email Me</a>
-  <a href="tel:14253809808" class="btn secondary">Call Me</a>
-</div>
-
-<div class="section">
-  <h2>About</h2>
-  <p>
-    Electrical engineer focused on energy audits, system optimization, and modern control technologies.
-    Delivering practical, efficient, and reliable solutions for residential and commercial projects.
-  </p>
-</div>
-
-<div class="section">
-  <h2>Services</h2>
-
-  <div class="card">
-    <h3>Energy Audits</h3>
-    <p>Analysis of electrical consumption and system performance.</p>
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="10" fill="#1C3A2E"/>
+        <path d="M11 22.5 20 13l9 9.5" stroke="#E0922E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.5 21v7.5h13V21" stroke="#6E9B7C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 28.5V24" stroke="#E0922E" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      SMARTXYNERGY
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#calc">Savings</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+    <div class="nav-right">
+      <a href="tel:+14253809808" class="nav-phone">(425) 380-9808</a>
+      <a href="#book" class="btn btn-primary">Free assessment</a>
+      <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').style.display='flex'"><span></span><span></span><span></span></button>
+    </div>
   </div>
+</header>
 
-  <div class="card">
-    <h3>Energy Efficiency</h3>
-    <p>Optimization and upgrades to reduce energy losses.</p>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Thermal audits · home energy</span>
+        <h1>Your home stops losing heat —<br><em>and you stop overpaying.</em></h1>
+        <p class="hero-sub">A thermal imaging audit shows exactly where heat escapes — or sneaks in. Insulation, windows, and heat pumps cut your heating and cooling bills by up to 50%: warm through the wet winters, cool through the hot summer days.</p>
+        <div class="hero-cta">
+          <a href="#book" class="btn btn-primary">Book your assessment
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#calc" class="btn btn-ghost">Estimate my savings</a>
+        </div>
+        <div class="hero-trust">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9"/></svg>
+          Serving Seattle &amp; the Eastside. 5-year workmanship warranty.
+        </div>
+      </div>
+
+      <!-- SIGNATURE: thermal before/after viewer (real photo) -->
+      <div>
+        <div class="season" id="season">
+          <button class="season-btn active" data-season="winter" type="button">❄ Winter</button>
+          <button class="season-btn" data-season="summer" type="button">☀ Summer</button>
+        </div>
+        <div class="viewer winter" id="viewer" style="--pos:50%">
+          <span class="v-label l" id="labBefore">Before · heat escaping</span>
+          <span class="v-label r" id="labAfter">After · heat stays in</span>
+
+          <!-- BEFORE: real photo as HOT thermal (red = heat escaping) -->
+          <div class="viewer-layer">
+            <img class="thermal-hot" loading="eager" alt="Thermal scan before weatherization — home glows red as heat escapes"
+                 src="https://images.unsplash.com/photo-1494526585095-c41746248156?fm=jpg&q=72&w=1400&auto=format&fit=crop">
+            <div class="glow"></div>
+            <div class="scan"></div>
+            <div class="scale hot">
+              <div class="bar"></div>
+              <div class="ticks"><span>90°</span><span>60°</span><span>35°</span></div>
+            </div>
+          </div>
+
+          <!-- AFTER: same real photo as COOL thermal (blue = heat retained), clipped to right -->
+          <div class="viewer-layer layer-after">
+            <img class="thermal-cool" loading="eager" alt="Thermal scan after weatherization — cool blue facade, heat stays inside"
+                 src="https://images.unsplash.com/photo-1494526585095-c41746248156?fm=jpg&q=72&w=1400&auto=format&fit=crop">
+            <div class="scan"></div>
+            <div class="scale cool">
+              <div class="bar"></div>
+              <div class="ticks"><span>55°</span><span>40°</span><span>30°</span></div>
+            </div>
+          </div>
+
+          <div class="frost"></div>
+          <div class="heatwave"></div>
+          <div class="snow" id="snow"></div>
+          <div class="handle" id="handle"></div>
+        </div>
+        <p class="viewer-cap" id="viewerCap">Winter: <b style="color:var(--ember)">red</b> shows heat escaping before weatherization; <b style="color:#2b6fd0">blue</b> shows heat kept inside afterward.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="card">
-    <h3>Wireless Control Systems</h3>
-    <p>Installation and configuration of smart control solutions.</p>
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat"><div class="num" data-to="50" data-suffix="%" data-prefix="up to ">up to 0%</div><div class="lab">lower heating &amp; cooling bills</div></div>
+    <div class="stat"><div class="num" data-to="1800" data-suffix="+">0+</div><div class="lab">Northwest homes improved</div></div>
+    <div class="stat"><div class="num" data-to="5" data-suffix=" yr">0 yr</div><div class="lab">workmanship warranty</div></div>
+    <div class="stat"><div class="num" data-to="2" data-suffix="–4 yr">0–4 yr</div><div class="lab">typical payback period</div></div>
   </div>
+</section>
 
-</div>
+<!-- ============ SERVICES ============ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What we do</span>
+      <h2>A complete thermal envelope — from diagnosis to results</h2>
+      <p>We don't sell insulation for its own sake. First we find where your home loses heat, then we fix exactly those losses.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h3M18 12h3M12 3v3M12 18v3"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <h3>Thermal imaging audit</h3>
+        <p>We find hidden heat loss: thermal bridges, gaps, drafts, and damp walls. You get a report with photos and a clear action plan.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V8l8-5 8 5v13" stroke-linejoin="round"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Insulation &amp; air sealing</h3>
+        <p>Attic, walls, and crawlspace sealed into one tight envelope that keeps heat in through winter and out during summer heat waves. Materials matched to your home and our cool, wet climate.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg></div>
+        <h3>Windows &amp; doors</h3>
+        <p>Replacement and weatherstripping. Fewer drafts, a quieter home, and noticeably warmer rooms by the first cold snap.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v6M7 9a5 5 0 1 0 10 0c0-2-2-3-2-6"/><circle cx="12" cy="15" r="6"/></svg></div>
+        <h3>Heat pumps &amp; heating</h3>
+        <p>Modern heat pumps and high-efficiency systems — efficient heating in winter and cooling in summer, without overpaying. You may also qualify for utility rebates.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h13a3 3 0 1 0-3-3M3 14h16a3 3 0 1 1-3 3M3 11h10"/></svg></div>
+        <h3>Ventilation &amp; HRV</h3>
+        <p>Heat-recovery ventilation brings in fresh air without losing warmth. Less damp and mold in our rainy climate.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v4l3 2"/></svg></div>
+        <h3>Smart climate control</h3>
+        <p>Smart thermostats and zoning. Heat on a schedule, room by room — no more heating an empty house.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="section">
-  <h2>Contact</h2>
-  <p>Email: Smartxynergy@gmail.com</p>
-  <p>Phone: 425.380.9808</p>
-</div>
+<!-- ============ PROCESS ============ -->
+<section class="section process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Four clear steps, no surprises in the quote</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">01</div><h3>Request &amp; call</h3><p>We talk through your home, the problems, and your goals. The consultation is free with no obligation.</p></div>
+      <div class="step reveal"><div class="n">02</div><h3>Thermal audit</h3><p>We come out with a thermal camera and find every point of heat loss. You see the problem with your own eyes.</p></div>
+      <div class="step reveal"><div class="n">03</div><h3>Plan &amp; quote</h3><p>A clear scope with priorities, timelines, and payback estimates. You decide where to start.</p></div>
+      <div class="step reveal"><div class="n">04</div><h3>Work &amp; verification</h3><p>We do the work and re-scan with the thermal camera to show the result. Backed by a 5-year workmanship warranty.</p></div>
+    </div>
+  </div>
+</section>
 
-<div class="footer">
-  © 2026 Kozyrev Pavel
-</div>
+<!-- ============ CALCULATOR ============ -->
+<section class="section" id="calc">
+  <div class="wrap calc-grid">
+    <div class="calc-box reveal">
+      <div class="field">
+        <label>Home size <span class="val" id="areaVal">2,500 sq ft</span></label>
+        <input type="range" id="area" min="800" max="8000" step="100" value="2500">
+      </div>
+      <div class="field">
+        <label>Winter heating cost / year <span class="val" id="spendVal">$4,000</span></label>
+        <input type="range" id="spend" min="600" max="15000" step="250" value="4000">
+      </div>
+      <div class="field">
+        <label>Summer cooling cost / year <span class="val" id="coolVal">$1,400</span></label>
+        <input type="range" id="cool" min="0" max="7000" step="100" value="1400">
+      </div>
+      <div class="calc-result">
+        <div class="small">You could save about</div>
+        <div class="big" id="saveYear">$1,950</div>
+        <div class="note">per year on heating &amp; cooling · <span id="save5">≈ $9,700</span> over 5 years</div>
+        <a href="#book" class="btn btn-primary" style="width:100%;justify-content:center">Get an exact estimate</a>
+      </div>
+    </div>
+    <div class="calc-side reveal">
+      <span class="eyebrow">Savings calculator</span>
+      <h2>How much are you overpaying for comfort year-round?</h2>
+      <p>Move the sliders to see your rough savings after your home is sealed up — warmer for less in winter, and cooler for less through the hot summer days. The same tight envelope keeps heat in when it's cold and out when it's hot.</p>
+      <p class="disc">This estimate is approximate and depends on your home's condition. We'll give you exact numbers after a thermal audit.</p>
+    </div>
+  </div>
+</section>
 
-</div>
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section process" id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Homeowner reviews</span>
+      <h2>A warm home isn't something you should have to tough out</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>Our back bedrooms used to be freezing no matter how high we ran the furnace. After they air-sealed the attic and replaced the windows, our heating bill dropped about a third — and the house finally feels warm.</p>
+        <div class="who"><div class="avatar">M</div><div><b>Mark, 49</b><span>Bellevue, WA</span></div></div>
+      </div>
+      <div class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>I loved that they ran the thermal scan first and showed me everything on the images. No upselling — they sealed what was actually leaking. It paid back faster than they quoted.</p>
+        <div class="who"><div class="avatar">K</div><div><b>Karen, 43</b><span>Issaquah, WA</span></div></div>
+      </div>
+      <div class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>Our '90s house always felt drafty and damp. They added heat-recovery ventilation and insulated the walls — the damp is gone, it's easier to breathe, and the heat finally stays put.</p>
+        <div class="who"><div class="avatar">D</div><div><b>Dave, 55</b><span>Tacoma, WA</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ============ FINAL CTA / FORM ============ -->
+<section class="section" id="book">
+  <div class="wrap">
+    <div class="final reveal">
+      <svg class="ridge" preserveAspectRatio="none" viewBox="0 0 1200 200" aria-hidden="true">
+        <path d="M0 150 L60 120 L70 132 L130 96 L140 110 L210 70 L222 86 L300 52 L312 70 L380 96 L392 112 L470 78 L482 96 L560 120 L572 136 L650 104 L662 120 L740 86 L752 104 L840 132 L852 148 L930 116 L942 132 L1020 150 L1120 120 L1200 150 L1200 200 L0 200 Z" fill="#163325" opacity=".9"/>
+        <path d="M0 178 L80 156 L92 170 L180 140 L192 156 L290 124 L302 140 L400 162 L412 176 L520 146 L532 162 L640 180 L652 192 L760 160 L900 184 L1040 158 L1200 182 L1200 200 L0 200 Z" fill="#0f261b"/>
+      </svg>
+      <div class="final-txt">
+        <span class="eyebrow">Free home assessment</span>
+        <h2>Find out where your home loses heat — no obligation</h2>
+        <p>Leave your details and we'll find a time that works. We'll come out, run a thermal scan, and tell you honestly what's worth doing first.</p>
+        <div class="final-feat">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg>We call back within one business day</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg>No pushy sales calls or spam</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg>A clear quote with payback estimates</div>
+        </div>
+      </div>
+      <div class="form">
+        <form id="leadForm" onsubmit="return submitLead(event)">
+          <h3>Book your assessment</h3>
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="tel" name="phone" placeholder="Phone number" required>
+          <input type="text" name="area" placeholder="Home size, sq ft (optional)">
+          <button type="submit" class="btn btn-primary">Book my assessment</button>
+          <p class="fine">By submitting, you agree to be contacted about your request.</p>
+        </form>
+        <div class="form-done" id="formDone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Request received</h3>
+          <p>Thanks! We'll call within one business day to set up your assessment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-bg"></div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col" style="max-width:280px">
+        <a href="#" class="logo" style="margin-bottom:14px">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1C3A2E"/><path d="M11 22.5 20 13l9 9.5" stroke="#E0922E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 21v7.5h13V21" stroke="#6E9B7C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          SMARTXYNERGY
+        </a>
+        <p>Home energy and comfort for the Pacific Northwest. Keep the heat where it belongs.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="#services">Thermal imaging audit</a>
+        <a href="#services">Insulation &amp; air sealing</a>
+        <a href="#services">Windows &amp; doors</a>
+        <a href="#services">Heat pumps</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#process">How it works</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#calc">Savings calculator</a>
+        <a href="#book">Book assessment</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="tel:+14253809808">(425) 380-9808</a>
+        <a href="mailto:smartxynergy@gmail.com">smartxynergy@gmail.com</a>
+        <p>Serving Seattle &amp; the Eastside<br>WA Lic. #SMRTXY892KD</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SMARTXYNERGY</span>
+      <span>Privacy policy · Terms of service</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Thermal viewer drag */
+  (function(){
+    const v=document.getElementById('viewer');
+    if(!v) return;
+    let active=false;
+    function setPos(clientX){
+      const r=v.getBoundingClientRect();
+      let p=((clientX-r.left)/r.width)*100;
+      p=Math.max(2,Math.min(98,p));
+      v.style.setProperty('--pos',p+'%');
+    }
+    const start=e=>{active=true;setPos((e.touches?e.touches[0]:e).clientX);};
+    const move=e=>{if(active)setPos((e.touches?e.touches[0]:e).clientX);};
+    const end=()=>{active=false;};
+    v.addEventListener('mousedown',start);v.addEventListener('touchstart',start,{passive:true});
+    window.addEventListener('mousemove',move);window.addEventListener('touchmove',move,{passive:true});
+    window.addEventListener('mouseup',end);window.addEventListener('touchend',end);
+  })();
+
+  /* Snow (cold weather) */
+  (function(){
+    const c=document.getElementById('snow');
+    if(!c) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const N=60;
+    for(let i=0;i<N;i++){
+      const f=document.createElement('div');
+      f.className='flake';
+      const size=(Math.random()*3.4+1.4).toFixed(1);
+      f.style.left=(Math.random()*100).toFixed(2)+'%';
+      f.style.width=size+'px';
+      f.style.height=size+'px';
+      f.style.opacity=(Math.random()*0.5+0.45).toFixed(2);
+      const fall=(Math.random()*5+4).toFixed(1);
+      const sway=(Math.random()*2.5+1.8).toFixed(1);
+      f.style.animationDuration=fall+'s, '+sway+'s';
+      f.style.animationDelay=(-Math.random()*fall).toFixed(1)+'s, '+(-Math.random()*sway).toFixed(1)+'s';
+      c.appendChild(f);
+    }
+  })();
+
+  /* Season toggle (winter heat loss <-> summer heat gain) */
+  (function(){
+    const seg=document.getElementById('season'), v=document.getElementById('viewer');
+    const lb=document.getElementById('labBefore'), la=document.getElementById('labAfter'), cap=document.getElementById('viewerCap');
+    if(!seg||!v) return;
+    const txt={
+      winter:{b:'Before · heat escaping', a:'After · heat stays in',
+        c:'Winter: <b style="color:var(--ember)">red</b> shows heat escaping before weatherization; <b style="color:#2b6fd0">blue</b> shows heat kept inside afterward.'},
+      summer:{b:'Before · heat gets in', a:'After · stays cool',
+        c:'Summer: <b style="color:var(--ember)">red</b> shows outdoor heat getting in before; <b style="color:#2b6fd0">blue</b> shows the home staying cool afterward.'}
+    };
+    seg.addEventListener('click',e=>{
+      const btn=e.target.closest('.season-btn'); if(!btn) return;
+      const s=btn.dataset.season;
+      seg.querySelectorAll('.season-btn').forEach(b=>b.classList.toggle('active',b===btn));
+      v.classList.toggle('summer', s==='summer');
+      v.classList.toggle('winter', s==='winter');
+      lb.textContent=txt[s].b; la.textContent=txt[s].a; cap.innerHTML=txt[s].c;
+    });
+  })();
+
+  /* Savings calculator (year-round: heating + cooling) */
+  (function(){
+    const area=document.getElementById('area'), spend=document.getElementById('spend'), cool=document.getElementById('cool');
+    const areaVal=document.getElementById('areaVal'), spendVal=document.getElementById('spendVal'), coolVal=document.getElementById('coolVal');
+    const saveYear=document.getElementById('saveYear'), save5=document.getElementById('save5');
+    const fmt=n=>Math.round(n).toLocaleString('en-US');
+    function calc(){
+      const a=+area.value, h=+spend.value, co=+cool.value, total=h+co;
+      areaVal.textContent=fmt(a)+' sq ft';
+      spendVal.textContent='$'+fmt(h);
+      coolVal.textContent='$'+fmt(co);
+      const rate=Math.min(0.50, 0.30 + (a/8000)*0.12 + (total/22000)*0.10);
+      const yr=total*rate;
+      saveYear.textContent='$'+fmt(yr);
+      save5.textContent='≈ $'+fmt(yr*5);
+    }
+    [area,spend,cool].forEach(el=>el&&el.addEventListener('input',calc));
+    calc();
+  })();
+
+  /* Reveal on scroll */
+  (function(){
+    const io=new IntersectionObserver((es)=>{
+      es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  })();
+
+  /* Animated stats */
+  (function(){
+    const nums=document.querySelectorAll('.stat .num');
+    const io=new IntersectionObserver((es)=>{
+      es.forEach(e=>{
+        if(!e.isIntersecting) return;
+        const el=e.target, to=+el.dataset.to, suf=el.dataset.suffix||'', pre=el.dataset.prefix||'';
+        if(isNaN(to)){io.unobserve(el);return;}
+        let cur=0, step=Math.max(1,to/40);
+        const t=setInterval(()=>{
+          cur+=step;
+          if(cur>=to){cur=to;clearInterval(t);}
+          el.textContent=pre+Math.round(cur).toLocaleString('en-US')+suf;
+        },22);
+        io.unobserve(el);
+      });
+    },{threshold:.5});
+    nums.forEach(n=>io.observe(n));
+  })();
+
+  /* Lead form */
+  function submitLead(e){
+    e.preventDefault();
+    document.getElementById('leadForm').style.display='none';
+    document.getElementById('formDone').style.display='block';
+    return false;
+  }
+</script>
 </body>
 </html>
